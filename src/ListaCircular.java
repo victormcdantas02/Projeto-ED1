@@ -30,8 +30,8 @@ public class ListaCircular<T> {
         return tamanho;
     }
 
-    public void adicionarFim(T dado){
-        NoCircular<T> novoNo = new NoCircular<T>(dado);
+    public void adicionarFim(T valor){
+        NoCircular<T> novoNo = new NoCircular<T>(valor);
         NoCircular<T> ultimo = sentinela.getAnter();
         
         novoNo.setProx(sentinela);
@@ -42,8 +42,8 @@ public class ListaCircular<T> {
         tamanho++;
     }
 
-    public void adicionarInicio(T dado){
-        NoCircular<T> novoNo = new NoCircular<T>(dado);
+    public void adicionarInicio(T valor){
+        NoCircular<T> novoNo = new NoCircular<T>(valor);
         NoCircular<T> primeiro = sentinela.getProx();
 
         novoNo.setProx(primeiro);
@@ -52,6 +52,47 @@ public class ListaCircular<T> {
         primeiro.setAnter(novoNo);
 
         tamanho++;
+    }
+
+    public T removerInicio(){
+        if(estaVazia()){
+            System.out.println("A lista está vazia");
+        }
+
+        NoCircular<T> primeiro = sentinela.getProx();
+        T valor = primeiro.getValor();
+
+        sentinela.setProx(primeiro.getProx());
+        primeiro.getProx().setAnter(sentinela);
+
+        tamanho--;
+        return valor;
+    }
+
+    public T removerFim(){
+        if(estaVazia()){
+            System.out.println("A lista está vazia");
+        }
+
+        NoCircular<T> ultimo = sentinela.getAnter();
+        T valor = ultimo.getValor();
+
+        sentinela.setAnter(ultimo.getAnter());
+        ultimo.getAnter().setProx(sentinela);
+
+        tamanho--;
+        return valor;
+    }
+
+    public boolean estaNaLista(T valor){
+        NoCircular<T> atual = sentinela.getProx();
+        while(atual != sentinela){
+            if(atual.getValor() == valor){
+                return true;
+            }
+            atual = atual.getProx();
+        }
+        return false;
     }
 
     public void exibirLista(){

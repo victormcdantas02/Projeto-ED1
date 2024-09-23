@@ -3,7 +3,7 @@ public class NoDuplo<T> {
     private NoDuplo<T> prox;
     private NoDuplo<T> anter;
 
-    public NoDuplo(T valor, NoDuplo<T> prox, NoDuplo<T> anter){
+    public NoDuplo(T valor){
         this.valor = valor;
         this.prox = null;
         this.anter = null;

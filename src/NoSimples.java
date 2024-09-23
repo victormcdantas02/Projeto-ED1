@@ -2,7 +2,7 @@ public class NoSimples<T>{
     private T valor;
     private NoSimples<T> prox;
 
-    public NoSimples(T valor, NoSimples<T> prox){
+    public NoSimples(T valor){
         this.valor = valor;
         this.prox = null;
     }

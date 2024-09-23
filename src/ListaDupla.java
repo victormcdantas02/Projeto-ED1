@@ -35,4 +35,88 @@ public class ListaDupla<T> {
     public int tamanho(){
         return tamanho;
     }
+
+    public void adicionarFim(T valor){
+        NoDuplo<T> novoNo = new NoDuplo<T>(valor);
+        if(estaVazia()){
+            primeiro = novoNo;
+            ultimo = novoNo;
+        } else {
+            ultimo.setProx(novoNo);
+            novoNo.setAnter(ultimo);
+            ultimo = novoNo;
+        }
+        tamanho++;
+    }
+
+    public void adicionarInicio(T valor){
+        NoDuplo<T> novoNo = new NoDuplo<T>(valor);
+        if(estaVazia()){
+            primeiro = novoNo;
+            ultimo = novoNo;
+        } else {
+            primeiro.setAnter(novoNo);
+            novoNo.setProx(primeiro);
+            primeiro = novoNo;
+        }
+        tamanho++;
+    }
+
+    public T removerFim(){
+        if(estaVazia()){
+            System.out.println("A lista está vazia");
+        }
+
+        T valor = ultimo.getValor();
+        if(primeiro == ultimo){
+            primeiro = null;
+            ultimo = null;
+        } else {
+            ultimo = ultimo.getAnter();
+            ultimo.setProx(null);
+        }
+        tamanho--;
+        return valor;
+    }
+
+    public T removerInicio(){
+        if(estaVazia()){
+            System.out.println("A lista está vazia");
+        }
+
+        T valor = primeiro.getValor();
+        if(primeiro == ultimo){
+            primeiro = null;
+            ultimo = null;
+        } else {
+            primeiro = primeiro.getProx();
+            primeiro.setAnter(null);
+        }
+        tamanho--;
+        return valor;
+    }
+
+    public boolean estaNaLista(T valor){
+        NoDuplo<T> atual = primeiro;
+        while(atual != null){
+            if(atual.getValor() == valor){
+                return true;
+            }
+            atual = atual.getProx();
+        }
+        return false;
+    }
+
+    public void exibirLista(){
+        if(estaVazia()){
+            System.out.println("A lista está vazia");
+            return;
+        }
+
+        NoDuplo<T> atual = primeiro;
+        while(atual.getProx() != null){
+            System.out.println(atual.getValor());
+            atual = atual.getProx();
+        }
+    }
 }
