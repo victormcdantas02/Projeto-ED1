@@ -1,11 +1,29 @@
-public class NoCircular {
-    //Inserir tipo de valor de nó dependendo de como for usar o tipo de lista (para classe Evento, Hospital ou Restaurante, conforme indica o projeto)
-    NoCircular prox;
-    NoCircular anter;
+public class NoCircular<T> {
+    private T valor;
+    private NoCircular<T> prox;
+    private NoCircular<T> anter;
 
-    public NoCircular(NoCircular prox, NoCircular anter){
-        this.prox = prox;
-        this.anter = anter;
+    public NoCircular(T valor){
+        this.valor = valor;
     }
 
+    public T getValor() {
+        return valor;
+    }
+    public void setValor(T valor) {
+        this.valor = valor;
+    }
+    public NoCircular<T> getProx() {
+        return prox;
+    }
+    public void setProx(NoCircular<T> prox) {
+        this.prox = prox;
+    }
+    public NoCircular<T> getAnter() {
+        return anter;
+    }
+    public void setAnter(NoCircular<T> anter) {
+        this.anter = anter;
+    }
+    
 }

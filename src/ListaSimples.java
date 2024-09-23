@@ -1,16 +1,16 @@
-public class ListaSimples {
-    private NoSimples primeiro;
+public class ListaSimples<T> {
+    private NoSimples<T> primeiro;
     private int tamanho;
     
-    public ListaSimples(NoSimples primeiro, int tamanho) {
+    public ListaSimples(NoSimples<T> primeiro, int tamanho) {
         this.primeiro = null;
         this.tamanho = 0;
     }
 
-    public NoSimples getPrimeiro() {
+    public NoSimples<T> getPrimeiro() {
         return primeiro;
     }
-    public void setPrimeiro(NoSimples primeiro) {
+    public void setPrimeiro(NoSimples<T> primeiro) {
         this.primeiro = primeiro;
     }
     public int getTamanho() {
@@ -19,13 +19,11 @@ public class ListaSimples {
     public void setTamanho(int tamanho) {
         this.tamanho = tamanho;
     }
-
     public boolean estaVazia(){
         return primeiro == null;
     }
-    
     public int tamanho(){
         return tamanho;
     }
-
+    
 }

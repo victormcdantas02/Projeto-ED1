@@ -1,18 +1,24 @@
-public class ListaDupla {
-    private NoDuplo primeiro;
-    private NoDuplo ultimo;
+public class ListaDupla<T> {
+    private NoDuplo<T> primeiro;
+    private NoDuplo<T> ultimo;
     private int tamanho;
-    
-    public NoDuplo getPrimeiro() {
+
+    public ListaDupla(NoDuplo<T> primeiro, NoDuplo<T> ultimo, int tamanho){
+        this.primeiro = null;
+        this.ultimo = null;
+        this.tamanho = 0;
+    }
+
+    public NoDuplo<T> getPrimeiro() {
         return primeiro;
     }
-    public void setPrimeiro(NoDuplo primeiro) {
+    public void setPrimeiro(NoDuplo<T> primeiro) {
         this.primeiro = primeiro;
     }
-    public NoDuplo getUltimo() {
+    public NoDuplo<T> getUltimo() {
         return ultimo;
     }
-    public void setUltimo(NoDuplo ultimo) {
+    public void setUltimo(NoDuplo<T> ultimo) {
         this.ultimo = ultimo;
     }
     public int getTamanho() {
@@ -20,12 +26,6 @@ public class ListaDupla {
     }
     public void setTamanho(int tamanho) {
         this.tamanho = tamanho;
-    }
-
-    public ListaDupla(NoDuplo primeiro, NoDuplo ultimo, int tamanho){
-        this.primeiro = null;
-        this.ultimo = null;
-        this.tamanho = 0;
     }
 
     public boolean estaVazia(){
