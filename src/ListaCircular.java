@@ -56,7 +56,7 @@ public class ListaCircular<T> {
 
     public T removerInicio(){
         if(estaVazia()){
-            System.out.println("A lista está vazia");
+            System.out.println("A lista está vazia.");
         }
 
         NoCircular<T> primeiro = sentinela.getProx();
@@ -71,7 +71,7 @@ public class ListaCircular<T> {
 
     public T removerFim(){
         if(estaVazia()){
-            System.out.println("A lista está vazia");
+            System.out.println("A lista está vazia.");
         }
 
         NoCircular<T> ultimo = sentinela.getAnter();
@@ -82,6 +82,24 @@ public class ListaCircular<T> {
 
         tamanho--;
         return valor;
+    }
+
+    public void removerMeio(T valor){
+        if(estaNaLista(valor) != true){
+            System.out.println("O item buscado não existe.");
+            return;
+        }
+        NoCircular<T> atual = sentinela.getProx();
+        while(atual != sentinela){
+            if(atual.getValor() == valor){
+                atual.getAnter().setProx(atual.getProx());
+                atual.getProx().setAnter(atual.getAnter());
+                tamanho--;
+                System.out.println("Item encontrado e removido da lista.");
+                return;
+            }
+            atual = atual.getProx();
+        }
     }
 
     public boolean estaNaLista(T valor){

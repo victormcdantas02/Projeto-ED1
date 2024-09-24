@@ -64,7 +64,7 @@ public class ListaDupla<T> {
 
     public T removerFim(){
         if(estaVazia()){
-            System.out.println("A lista está vazia");
+            System.out.println("A lista está vazia.");
         }
 
         T valor = ultimo.getValor();
@@ -81,7 +81,7 @@ public class ListaDupla<T> {
 
     public T removerInicio(){
         if(estaVazia()){
-            System.out.println("A lista está vazia");
+            System.out.println("A lista está vazia.");
         }
 
         T valor = primeiro.getValor();
@@ -94,6 +94,23 @@ public class ListaDupla<T> {
         }
         tamanho--;
         return valor;
+    }
+
+    public void removerMeio(T valor){
+        if(estaNaLista(valor) != true){
+            System.out.println("O item buscado não existe.");
+            return;
+        }
+
+        NoDuplo<T> atual = primeiro;
+        while(atual != null){
+            if(atual.getValor() == valor){
+                atual.getAnter().setProx(atual.getProx());
+                atual.getProx().setAnter(atual.getAnter());
+                System.out.println("Item encontrado e removido da lista.");
+            }
+            atual = atual.getProx();
+        }
     }
 
     public boolean estaNaLista(T valor){
@@ -109,7 +126,7 @@ public class ListaDupla<T> {
 
     public void exibirLista(){
         if(estaVazia()){
-            System.out.println("A lista está vazia");
+            System.out.println("A lista está vazia.");
             return;
         }
 

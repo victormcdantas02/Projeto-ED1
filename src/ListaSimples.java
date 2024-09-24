@@ -51,7 +51,7 @@ public class ListaSimples<T> {
 
     public T removerInicio(){
         if(estaVazia()){
-            System.out.println("A lista está vazia");
+            System.out.println("A lista está vazia.");
         }
 
         T valor = primeiro.getValor();
@@ -63,7 +63,7 @@ public class ListaSimples<T> {
 
     public T removerFim(){
         if(estaVazia()){
-            System.out.println("A lista está vazia");
+            System.out.println("A lista está vazia.");
         }
 
         if(primeiro.getProx() == null){
@@ -81,6 +81,30 @@ public class ListaSimples<T> {
         tamanho--;
         return valor;
     }
+    public void removerMeio(T valor){
+        if(estaNaLista(valor) != true){
+            System.out.println("O item buscado não existe.");
+            return;
+        }
+
+        NoSimples<T> atual = primeiro;
+        NoSimples<T> anterior = null;
+
+        while(atual != null){
+            if(atual.getValor() == valor){
+                if(anterior == null){
+                    primeiro = atual.getProx();
+                } else {
+                    anterior.setProx(atual.getProx());
+                }
+                tamanho--;
+                System.out.println("Item encontrado e removido da lista.");
+                return;
+            }
+            anterior = atual;
+            atual = atual.getProx();
+        }
+    }
 
     public boolean estaNaLista(T valor){
         NoSimples<T> atual = primeiro;
@@ -95,7 +119,7 @@ public class ListaSimples<T> {
     
     public void exibirLista(){
         if(estaVazia()){
-            System.out.println("A lista está vazia");
+            System.out.println("A lista está vazia.");
             return;
         }
 

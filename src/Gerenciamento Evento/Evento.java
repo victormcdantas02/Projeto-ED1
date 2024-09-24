@@ -1,7 +1,7 @@
 import java.util.Date;
 public class Evento {
     String nome;
-        tring local;
+        String local;
         int capacidade;
         Date diaDoEvento;
     public Evento(String nome, String local, int capacidade, Date diaDoEvento) {
