@@ -19,6 +19,4 @@ public class Mesa {
     public void setDisponibilidade(boolean disponibilidade) {
         this.disponibilidade = disponibilidade;
     }
-    
-  
 }
