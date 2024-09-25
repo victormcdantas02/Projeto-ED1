@@ -1,9 +1,10 @@
 public class Participante {
     String nome;
-    String numeroInscricao;
-    Evento evento;
+    int numeroInscricao;
+    private Evento evento;
+    public Participante proximo;
 
-    public Participante(String nome, String numeroInscricao, Evento evento) {
+    public Participante(String nome, int numeroInscricao, String evento2) {
         this.nome = nome;
         this.numeroInscricao = numeroInscricao;
         this.evento = evento;
@@ -17,11 +18,11 @@ public class Participante {
         this.nome = nome;
     }
 
-    public String getNumeroInscricao() {
+    public int getNumeroInscricao() {
         return numeroInscricao;
     }
 
-    public void setNumeroInscricao(String numeroInscricao) {
+    public void setNumeroInscricao(int numeroInscricao) {
         this.numeroInscricao = numeroInscricao;
     }
 
