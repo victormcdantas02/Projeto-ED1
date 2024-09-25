@@ -1,7 +1,7 @@
 public class Medico {
-    String nome;
-    String especialidade;
-    boolean disponibilidade;
+    private String nome;
+    private String especialidade;
+    private boolean disponibilidade;
     
     public Medico(String nome, String especialidade, boolean disponibilidade) {
         this.nome = nome;

@@ -1,10 +1,10 @@
 import java.util.Date;
 
 public class Paciente {
-    String nome;
-    int idade;
-    String historicoMedico;
-    Date ultimaConsulta;
+    private String nome;
+    private int idade;
+    private String historicoMedico;
+    private Date ultimaConsulta;
     
     public Paciente(String nome, int idade, String historicoMedico, Date ultimaConsulta) {
         this.nome = nome;
