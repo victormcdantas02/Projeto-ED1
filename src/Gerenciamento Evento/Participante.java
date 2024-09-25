@@ -1,10 +1,12 @@
 public class Participante {
     String nome;
     String numeroInscricao;
+    Evento evento;
 
-    public Participante(String nome, String numeroInscricao) {
+    public Participante(String nome, String numeroInscricao, Evento evento) {
         this.nome = nome;
         this.numeroInscricao = numeroInscricao;
+        this.evento = evento;
     }
 
     public String getNome() {
@@ -21,5 +23,13 @@ public class Participante {
 
     public void setNumeroInscricao(String numeroInscricao) {
         this.numeroInscricao = numeroInscricao;
+    }
+
+    public Evento getEvento() {
+        return evento;
+    }
+
+    public void setEvento(Evento evento) {
+        this.evento = evento;
     }
 }
