@@ -4,7 +4,7 @@ public class Participante {
     private Evento evento;
     public Participante proximo;
 
-    public Participante(String nome, int numeroInscricao, String evento2) {
+    public Participante(String nome, int numeroInscricao, Evento evento) {
         this.nome = nome;
         this.numeroInscricao = numeroInscricao;
         this.evento = evento;

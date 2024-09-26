@@ -20,7 +20,7 @@ public class Restaurante {
         return null; 
     }
 
-    public void adicionarPedido(String numeroMesa, ItemPedido item) {
+    public void adicionarPedido(String numeroMesa, Pedido item) {
         Mesa mesa = buscarMesa(numeroMesa);
         if (mesa != null) {
             mesa.adicionarPedido(item);
