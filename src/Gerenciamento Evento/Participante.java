@@ -1,6 +1,6 @@
 public class Participante {
-    String nome;
-    int numeroInscricao;
+    private String nome;
+    private int numeroInscricao;
     private Evento evento;
     public Participante proximo;
 
