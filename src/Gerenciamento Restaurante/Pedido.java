@@ -1,12 +1,12 @@
 public class Pedido {
     String descricao;
     int tamanho;
-    double valor;
+    double preço;
     
-    public Pedido(String descricao, int tamanho, double valor) {
+    public Pedido(String descricao, int tamanho, double preço) {
         this.descricao = descricao;
         this.tamanho = tamanho;
-        this.valor = valor;
+        this.preço = preço;
     }
     
     public String getDescricao() {
@@ -17,12 +17,12 @@ public class Pedido {
         this.descricao = descricao;
     }
     
-    public double getValor() {
-        return valor;
+    public double getPreço() {
+        return preço;
     }
     
-    public void setValor(double valor) {
-        this.valor = valor;
+    public void setPreço(double preço) {
+        this.preço = preço;
     }
     
     public int getTamanho() {

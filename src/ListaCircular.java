@@ -2,7 +2,7 @@ public class ListaCircular<T> {
     private NoCircular<T> sentinela;
     private int tamanho;
 
-    public ListaCircular(int tamanho){
+    public ListaCircular(){
         this.tamanho = 0;
         sentinela = new NoCircular<T>(null);
         sentinela.setAnter(sentinela);

@@ -1,10 +1,12 @@
 public class Mesa {
     private String numero;
     private boolean disponibilidade;
+    private ListaSimples<Pedido> pedidosdaMesa;
 
-    public Mesa(String numero, boolean disponibilidade) {
+    public Mesa(String numero) {
         this.numero = numero;
-        this.disponibilidade = disponibilidade;
+        this.disponibilidade = true;
+        pedidosdaMesa = new ListaSimples<>();
     }
     
     public String getNumero() {
@@ -18,5 +20,33 @@ public class Mesa {
     }
     public void setDisponibilidade(boolean disponibilidade) {
         this.disponibilidade = disponibilidade;
+    }
+    public ListaSimples<Pedido> getPedidosdaMesa() {
+        return pedidosdaMesa;
+    }
+
+    public void setPedidosdaMesa(ListaSimples<Pedido> pedidosdaMesa){
+        this.pedidosdaMesa = pedidosdaMesa;
+    }
+
+    public void adicionarPedidos(Pedido item){
+        pedidosdaMesa.adicionarInicio(item);
+        System.out.println("Pedido registrado.");
+    }
+
+    public double calcularTotal(){
+        if(pedidosdaMesa.getTamanho() == 0){
+            System.out.println("A mesa não possui pedidos.");
+            return 0;
+        }
+        NoSimples<Pedido> atual = pedidosdaMesa.getPrimeiro();
+        double total = 0;
+        while (atual != null){
+            total = total + atual.getValor().getPreço();
+            atual = atual.getProx();
+        }
+        ListaSimples<Pedido> novoRegistro = new ListaSimples<>();
+        pedidosdaMesa = novoRegistro;
+        return total;
     }
 }

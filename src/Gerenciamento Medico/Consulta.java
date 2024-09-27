@@ -4,11 +4,15 @@ public class Consulta {
     private String nomePaciente;
     private LocalDateTime diaConsulta;
     private String nomeMedico;
+    private ListaCircular<Consulta> agendamentos;
+    private ListaCircular<Paciente> registroPacientes;
     
     public Consulta(String nome, LocalDateTime diaConsulta, String nomeMedico) {
         this.nomePaciente = nome;
         this.diaConsulta = diaConsulta;
         this.nomeMedico = nomeMedico;
+        agendamentos = new ListaCircular<>();
+        registroPacientes = new ListaCircular<>();
     }
     public String getNome() {
         return nomePaciente;
@@ -27,6 +31,23 @@ public class Consulta {
     }
     public void setNomeMedico(String nomeMedico) {
         this.nomeMedico = nomeMedico;
+    }
+
+    public ListaCircular<Consulta> getAgendamentos(){
+        return agendamentos;
+    }
+
+    public ListaCircular<Paciente> getRegistroPacientes(){
+        return registroPacientes;
+    }
+
+    public void registrarPaciente(Paciente novoRegistro){
+        if (novoRegistro == null) {
+            System.out.println("Por favor inserir os dados do paciente corretamente.");
+            return;
+        }
+        registroPacientes.adicionarInicio(novoRegistro);
+        System.out.println("Paciente " + novoRegistro.getNome() + " registrado com sucesso no hospital.");
     }
 
     public void agendarConsulta(String nomeMedico, String nomePaciente, LocalDateTime dataHoraConsulta) {

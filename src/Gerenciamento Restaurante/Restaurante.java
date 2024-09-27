@@ -1,43 +1,33 @@
-import java.util.ArrayList;
 
 public class Restaurante {
-    private ArrayList<Mesa> mesas;
+    private ListaDupla<Mesa> mesas;
 
     public Restaurante() {
-        mesas = new ArrayList<>();
+        mesas = new ListaDupla<>();
     }
 
-    public void adicionarMesa(Mesa mesa) {
-        mesas.add(mesa);
+    public ListaDupla<Mesa> getMesas(){
+        return mesas;
+    }
+    //Criar a variável de todas as mesas antes de registrar com o numero sendo o nome, se não a lista não acha
+    public void registrarMesa(Mesa mesa) {
+        if (mesa == null){
+            System.out.println("Favor inserir o número da mesa corretamente");
+            return;
+        }
+        mesas.adicionarInicio(mesa);
+        System.out.println("Mesa registrada com sucesso.");
     }
 
-    public Mesa buscarMesa(String numero) {
-        for (Mesa mesa : mesas) {
-            if (mesa.getNumero().equals(numero)) {
-                return mesa;
+    public void fecharConta(Mesa numeroMesa) {
+        if(mesas.estaNaLista(numeroMesa)){
+            NoDuplo<Mesa> atual = mesas.getPrimeiro();
+            while(atual.getValor() != numeroMesa){
+                atual = atual.getProx();
             }
-        }
-        return null; 
-    }
-
-    public void adicionarPedido(String numeroMesa, Pedido item) {
-        Mesa mesa = buscarMesa(numeroMesa);
-        if (mesa != null) {
-            mesa.adicionarPedido(item);
-            System.out.println("Pedido adicionado à mesa " + numeroMesa);
-        } else {
-            System.out.println("Mesa não encontrada.");
-        }
-    }
-
-    public void fecharConta(String numeroMesa) {
-        Mesa mesa = buscarMesa(numeroMesa);
-        if (mesa != null) {
-            double total = mesa.fecharConta();
-            System.out.println("Total da conta da mesa " + numeroMesa + ": R$ " + total);
-            mesa.setDisponibilidade(true); 
-        } else {
-            System.out.println("Mesa não encontrada.");
+            double totalApagar = atual.getValor().calcularTotal();
+            atual.getValor().setDisponibilidade(true);
+            System.out.println("O total a pagar será R$" + totalApagar);
         }
     }
 

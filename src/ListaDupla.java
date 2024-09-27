@@ -3,7 +3,7 @@ public class ListaDupla<T> {
     private NoDuplo<T> ultimo;
     private int tamanho;
 
-    public ListaDupla(NoDuplo<T> primeiro, NoDuplo<T> ultimo, int tamanho){
+    public ListaDupla(){
         this.primeiro = null;
         this.ultimo = null;
         this.tamanho = 0;

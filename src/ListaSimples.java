@@ -2,7 +2,7 @@ public class ListaSimples<T> {
     private NoSimples<T> primeiro;
     private int tamanho;
     
-    public ListaSimples(NoSimples<T> primeiro, int tamanho) {
+    public ListaSimples() {
         this.primeiro = null;
         this.tamanho = 0;
     }
