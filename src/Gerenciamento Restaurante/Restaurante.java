@@ -1,4 +1,3 @@
-
 public class Restaurante {
     private ListaDupla<Mesa> mesas;
 
@@ -9,7 +8,7 @@ public class Restaurante {
     public ListaDupla<Mesa> getMesas(){
         return mesas;
     }
-    //Criar a variável de todas as mesas antes de registrar com o numero sendo o nome, se não a lista não acha
+
     public void registrarMesa(Mesa mesa) {
         if (mesa == null){
             System.out.println("Favor inserir o número da mesa corretamente");
