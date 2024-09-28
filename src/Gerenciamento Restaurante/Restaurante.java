@@ -30,7 +30,6 @@ public class Restaurante {
         }
     }
 
-  
     public void buscarPedidoMesa(String numeroMesa, String descricaoPedido) {
         Mesa mesa = buscarMesa(numeroMesa);
         if (mesa != null) {
