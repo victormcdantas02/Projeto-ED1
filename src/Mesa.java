@@ -1,10 +1,12 @@
 public class Mesa {
     private String numero;
     private boolean disponibilidade;
+    private String cliente;
     private ListaSimples<Pedido> pedidosdaMesa;
 
-    public Mesa(String numero) {
+    public Mesa(String numero, String cliente) {
         this.numero = numero;
+        this.cliente = cliente;
         this.disponibilidade = true;
         pedidosdaMesa = new ListaSimples<>();
     }
@@ -27,6 +29,14 @@ public class Mesa {
 
     public void setPedidosdaMesa(ListaSimples<Pedido> pedidosdaMesa){
         this.pedidosdaMesa = pedidosdaMesa;
+    }
+
+    public String getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(String cliente) {
+        this.cliente = cliente;
     }
 
     public void adicionarPedidos(Pedido item){
