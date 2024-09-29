@@ -4,17 +4,14 @@ public class Consulta {
     private Paciente nomePaciente;
     private LocalDateTime diaConsulta;
     private Medico nomeMedico;
-    private ListaCircular<Consulta> agendamentos;
-    private ListaCircular<Paciente> registroPacientes;
-    private ListaDupla<Medico> registroMedicos;
+    private ListaCircular<Consulta> agendamentos = new ListaCircular<>();
+    private ListaCircular<Paciente> registroPacientes = new ListaCircular<>();
+    private ListaDupla<Medico> registroMedicos = new ListaDupla<>();
     
     public Consulta(Paciente nomePaciente, LocalDateTime diaConsulta, Medico nomeMedico) {
         this.nomePaciente = nomePaciente;
         this.diaConsulta = diaConsulta;
         this.nomeMedico = nomeMedico;
-        agendamentos = new ListaCircular<>();
-        registroPacientes = new ListaCircular<>();
-        registroMedicos = new ListaDupla<>();
     }
     public Paciente getNomePaciente() {
         return nomePaciente;
