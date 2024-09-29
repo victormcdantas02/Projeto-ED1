@@ -5,14 +5,12 @@ public class Paciente {
     private int idade;
     private String historicoMedico;
     private Date ultimaConsulta;
-    private ListaCircular<Consulta> registroConsultas;
     
     public Paciente(String nome, int idade, String historicoMedico, Date ultimaConsulta) {
         this.nome = nome;
         this.idade = idade;
         this.historicoMedico = historicoMedico;
         this.ultimaConsulta = ultimaConsulta;
-        registroConsultas = new ListaCircular<>();
     }
 
     public String getNome() {
@@ -45,10 +43,6 @@ public class Paciente {
 
     public void setUltimaConsulta(Date ultimaConsulta) {
         this.ultimaConsulta = ultimaConsulta;
-    }
-    
-    public ListaCircular<Consulta> getRegistroConsultas(){
-        return registroConsultas;
     }
     
 }

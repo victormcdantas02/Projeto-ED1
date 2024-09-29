@@ -1,24 +1,26 @@
 import java.time.LocalDateTime;
 
 public class Consulta {
-    private String nomePaciente;
+    private Paciente nomePaciente;
     private LocalDateTime diaConsulta;
-    private String nomeMedico;
+    private Medico nomeMedico;
     private ListaCircular<Consulta> agendamentos;
     private ListaCircular<Paciente> registroPacientes;
+    private ListaDupla<Medico> registroMedicos;
     
-    public Consulta(String nome, LocalDateTime diaConsulta, String nomeMedico) {
-        this.nomePaciente = nome;
+    public Consulta(Paciente nomePaciente, LocalDateTime diaConsulta, Medico nomeMedico) {
+        this.nomePaciente = nomePaciente;
         this.diaConsulta = diaConsulta;
         this.nomeMedico = nomeMedico;
         agendamentos = new ListaCircular<>();
         registroPacientes = new ListaCircular<>();
+        registroMedicos = new ListaDupla<>();
     }
-    public String getNome() {
+    public Paciente getNomePaciente() {
         return nomePaciente;
     }
-    public void setNome(String nome) {
-        this.nomePaciente = nome;
+    public void setNomePaciente(Paciente nomePaciente) {
+        this.nomePaciente = nomePaciente;
     }
     public LocalDateTime getDiaConsulta() {
         return diaConsulta;
@@ -26,19 +28,20 @@ public class Consulta {
     public void setDiaConsulta(LocalDateTime diaConsulta) {
         this.diaConsulta = diaConsulta;
     }
-    public String getNomeMedico() {
+    public Medico getNomeMedico() {
         return nomeMedico;
     }
-    public void setNomeMedico(String nomeMedico) {
+    public void setNomeMedico(Medico nomeMedico) {
         this.nomeMedico = nomeMedico;
     }
-
     public ListaCircular<Consulta> getAgendamentos(){
         return agendamentos;
     }
-
     public ListaCircular<Paciente> getRegistroPacientes(){
         return registroPacientes;
+    }
+    public ListaDupla<Medico> getRegistroMedicos() {
+        return registroMedicos;
     }
 
     public void registrarPaciente(Paciente novoRegistro){
@@ -50,10 +53,49 @@ public class Consulta {
         System.out.println("Paciente " + novoRegistro.getNome() + " registrado com sucesso no hospital.");
     }
 
-    public void agendarConsulta(String nomeMedico, String nomePaciente, LocalDateTime dataHoraConsulta) {
-        this.nomeMedico = nomeMedico;
-        this.nomePaciente = nomePaciente;
-        this.diaConsulta = dataHoraConsulta;
-        System.out.println("Consulta agendada com sucesso!");
+    public void agendarConsulta(Medico nomeMedico, Paciente nomePaciente, LocalDateTime dataHoraConsulta) {
+        Consulta novaConsulta = new Consulta(nomePaciente, dataHoraConsulta, nomeMedico);
+        agendamentos.adicionarInicio(novaConsulta);
+        System.out.println("Consulta agendada para dia e hora " + dataHoraConsulta);
+    }
+
+    public Paciente buscarPaciente(Paciente registroAlvo){
+        if(registroPacientes.estaNaLista(registroAlvo)){
+            NoCircular<Paciente> atual = registroPacientes.getSentinela().getProx();
+            while (atual.getValor() != registroAlvo){
+                atual = atual.getProx();
+            }
+            return atual.getValor();
+        } else {
+            System.out.println("O registro buscado não existe.");
+            return null;
+        }
+    }
+
+    public Medico buscarMedico(Medico registroAlvo){
+        if(registroMedicos.estaNaLista(registroAlvo)){
+            NoDuplo<Medico> atual = registroMedicos.getPrimeiro();
+            while (atual.getValor() != registroAlvo){
+                atual = atual.getProx();
+            }
+            return atual.getValor();
+        } else {
+            System.out.println("O registro buscado não existe.");
+            return null;
+        }
+    }
+
+    public void atualizarConsulta(Paciente novoPaciente, Medico novoMedico, LocalDateTime novaDataHora, Consulta alvoAtualização){
+        if(agendamentos.estaNaLista(alvoAtualização)){
+            NoCircular<Consulta> atual = agendamentos.getSentinela().getProx();
+            while(atual.getValor() != alvoAtualização){
+                atual = atual.getProx();
+            }
+            atual.getValor().setNomePaciente(novoPaciente);
+            atual.getValor().setDiaConsulta(novaDataHora);
+            atual.getValor().setNomeMedico(novoMedico);
+            System.out.println("Dados da consulta atualizados.");
+        }
+        return;
     }
 }
