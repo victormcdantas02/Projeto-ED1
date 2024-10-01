@@ -1,11 +1,11 @@
 public class Pedido {
     String descricao;
-    int tamanho;
+    int quantidade;
     double preço;
     
-    public Pedido(String descricao, int tamanho, double preço) {
+    public Pedido(String descricao, int quantidade, double preço) {
         this.descricao = descricao;
-        this.tamanho = tamanho;
+        this.quantidade = quantidade;
         this.preço = preço;
     }
     
@@ -25,11 +25,11 @@ public class Pedido {
         this.preço = preço;
     }
     
-    public int getTamanho() {
-        return tamanho;
+    public int getQuantidade() {
+        return quantidade;
     }
     
-    public void setTamanho(int tamanho) {
-        this.tamanho = tamanho;
+    public void setQuantidade(int quantidade) {
+        this.quantidade = quantidade;
     }
 }
