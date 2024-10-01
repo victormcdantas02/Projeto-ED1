@@ -1,16 +1,15 @@
 import java.util.Date;
-public class Evento{
-    String nome;
-    String data;
-    String local;
-    int capacidade;
-    public Evento proximo;
+public class Evento {
+    private String nome;
+    private String local;
+    private int capacidade;
+    private Date diaDoEvento;
     
-    public Evento(String nome, String data, String local, int capacidade) {
+    public Evento(String nome, String local, int capacidade, Date diaDoEvento) {
         this.nome = nome;
-        this.data = data;
         this.local = local;
         this.capacidade = capacidade;
+        this.diaDoEvento = diaDoEvento;
     }
 
     public String getNome() {
@@ -19,14 +18,6 @@ public class Evento{
 
     public void setNome(String nome) {
         this.nome = nome;
-    }
-
-    public String getData() {
-        return data;
-    }
-
-    public void setData(String data) {
-        this.data = data;
     }
 
     public String getLocal() {
@@ -44,5 +35,13 @@ public class Evento{
     public void setCapacidade(int capacidade) {
         this.capacidade = capacidade;
     }
-}
+
+    public Date getDiaDoEvento() {
+        return diaDoEvento;
+    }
+
+    public void setDiaDoEvento(Date diaDoEvento) {
+        this.diaDoEvento = diaDoEvento;
+    }
     
+}
