@@ -77,15 +77,47 @@ public class Evento {
     }
 
     public Evento buscarEvento(Evento eventoAlvo){
-        
+        if(eventos.estaNaLista(eventoAlvo)){
+            NoSimples<Evento> atual = eventos.getPrimeiro();
+            while(atual.getValor() != eventoAlvo){
+                atual = atual.getProx();
+            }
+            return atual.getValor();
+        } else {
+            System.out.println("Evento não localizado.");
+            return null;
+        }
     }
 
     public Participante buscarParticipante(Participante participante){
-
+        Evento eventoInscrito = participante.getEvento();
+        if(eventos.estaNaLista(eventoInscrito)){
+            ListaSimples<Participante> listaEvento = buscarEvento(eventoInscrito).getParticipantesEvento();
+            if(listaEvento.estaNaLista(participante)){
+                NoSimples<Participante> atualParticipante = listaEvento.getPrimeiro();
+                while(atualParticipante.getValor() != participante){
+                    atualParticipante = atualParticipante.getProx();
+                }
+                return atualParticipante.getValor();
+            } else {
+                System.out.println("Participante não localizado.");
+                return null;
+            }
+        } else {
+            System.out.println("Evento não localizado");
+            return null;
+        }
     }
 
-    public void atualizarEvento(Evento eventoAlvo){
-
+    public void atualizarEvento(Evento eventoAlvo, String novoNome, Date novoDia, String novoLocal, int novaCapacidade){
+        Evento atualização = buscarEvento(eventoAlvo);
+        atualização.setCapacidade(novaCapacidade);
+        atualização.setDiaDoEvento(novoDia);
+        atualização.setLocal(novoLocal);
+        atualização.setNome(novoNome);
+        
+        eventos.removerMeio(eventoAlvo);
+        eventos.adicionarInicio(atualização);
     }
     
 }
