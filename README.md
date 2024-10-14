@@ -9,9 +9,13 @@ Linguagem de programação utilizada:
 Java
 
 Membros do Grupo:
+
 Breno Oliveira
+
 Ivo Guilherme
+
 Gustavo Luiz
+
 Victor Dantas
 
 
