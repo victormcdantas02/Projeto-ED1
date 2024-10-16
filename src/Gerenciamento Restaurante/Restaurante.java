@@ -8,10 +8,13 @@ public class Restaurante {
     public ListaDupla<Mesa> getMesas(){
         return mesas;
     }
+    public void setMesas(ListaDupla<Mesa> mesas) {
+        this.mesas = mesas;
+    }
 
     public void registrarMesa(Mesa mesa) {
         if (mesa == null){
-            System.out.println("Favor inserir o número da mesa corretamente");
+            System.out.println("Favor inserir os dados da mesa corretamente");
             return;
         }
         mesas.adicionarInicio(mesa);

@@ -4,7 +4,6 @@ public class Consulta {
     private Paciente nomePaciente;
     private LocalDateTime diaConsulta;
     private Medico nomeMedico;
-    private ListaCircular<Consulta> agendamentos = new ListaCircular<>();
     private ListaCircular<Paciente> registroPacientes = new ListaCircular<>();
     private ListaDupla<Medico> registroMedicos = new ListaDupla<>();
     
@@ -31,14 +30,17 @@ public class Consulta {
     public void setNomeMedico(Medico nomeMedico) {
         this.nomeMedico = nomeMedico;
     }
-    public ListaCircular<Consulta> getAgendamentos(){
-        return agendamentos;
-    }
     public ListaCircular<Paciente> getRegistroPacientes(){
         return registroPacientes;
     }
+    public void setRegistroPacientes(ListaCircular<Paciente> registroPacientes) {
+        this.registroPacientes = registroPacientes;
+    }
     public ListaDupla<Medico> getRegistroMedicos() {
         return registroMedicos;
+    }
+    public void setRegistroMedicos(ListaDupla<Medico> registroMedicos) {
+        this.registroMedicos = registroMedicos;
     }
 
     public void registrarPaciente(Paciente novoRegistro){
@@ -48,12 +50,6 @@ public class Consulta {
         }
         registroPacientes.adicionarInicio(novoRegistro);
         System.out.println("Paciente " + novoRegistro.getNome() + " registrado com sucesso no hospital.");
-    }
-
-    public void agendarConsulta(Medico nomeMedico, Paciente nomePaciente, LocalDateTime dataHoraConsulta) {
-        Consulta novaConsulta = new Consulta(nomePaciente, dataHoraConsulta, nomeMedico);
-        agendamentos.adicionarInicio(novaConsulta);
-        System.out.println("Consulta agendada para dia e hora " + dataHoraConsulta);
     }
 
     public Paciente buscarPaciente(Paciente registroAlvo){
@@ -82,17 +78,4 @@ public class Consulta {
         }
     }
 
-    public void atualizarConsulta(Paciente novoPaciente, Medico novoMedico, LocalDateTime novaDataHora, Consulta alvoAtualização){
-        if(agendamentos.estaNaLista(alvoAtualização)){
-            NoCircular<Consulta> atual = agendamentos.getSentinela().getProx();
-            while(atual.getValor() != alvoAtualização){
-                atual = atual.getProx();
-            }
-            atual.getValor().setNomePaciente(novoPaciente);
-            atual.getValor().setDiaConsulta(novaDataHora);
-            atual.getValor().setNomeMedico(novoMedico);
-            System.out.println("Dados da consulta atualizados.");
-        }
-        return;
-    }
 }

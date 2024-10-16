@@ -42,6 +42,18 @@ public class Mesa {
     public void adicionarPedidos(Pedido item){
         pedidosdaMesa.adicionarInicio(item);
         System.out.println("Pedido registrado.");
+        NoCircular<Cliente> atual = Main.registroClientes.getSentinela().getProx();
+        while(atual.getValor().getNome() != cliente){
+            if(atual == Main.registroClientes.getSentinela()){
+                break;
+            }
+            atual = atual.getProx();
+        }
+        if(atual == Main.registroClientes.getSentinela()){
+            System.out.println("Cliente não encontrado");
+        } else {
+            atual.getValor().getHistóricoPedidos().adicionarInicio(item);
+        }
     }
 
     public double calcularTotal(){
