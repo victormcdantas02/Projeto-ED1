@@ -51,7 +51,7 @@ public class Cliente {
         return registroMedico;
     }
     public void setRegistroMedico(ListaDupla<Consulta> registroMedico) {
-        this.registroMedico = registroMédico;
+        this.registroMedico = registroMedico;
     }
     public ListaCircular<Evento> getEventosParticipados() {
         return eventosParticipados;
