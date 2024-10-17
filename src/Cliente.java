@@ -3,8 +3,8 @@ public class Cliente {
     private int idade;
     private String email;
     private String cpf;
-    private ListaSimples<Pedido> históricoPedidos;
-    private ListaDupla<Consulta> registroMédico;
+    private ListaSimples<Pedido> historicoPedidos;
+    private ListaDupla<Consulta> registroMedico;
     private ListaCircular<Evento> eventosParticipados;
 
     public Cliente(String nome, int idade, String email, String cpf) {
@@ -12,8 +12,8 @@ public class Cliente {
         this.idade = idade;
         this.email = email;
         this.cpf = cpf;
-        históricoPedidos = new ListaSimples<>();
-        registroMédico = new ListaDupla<>();
+        historicoPedidos = new ListaSimples<>();
+        registroMedico = new ListaDupla<>();
         eventosParticipados = new ListaCircular<>();
     }
 
@@ -42,16 +42,16 @@ public class Cliente {
         this.cpf = cpf;
     }
     public ListaSimples<Pedido> getHistóricoPedidos() {
-        return históricoPedidos;
+        return historicoPedidos;
     }
     public void setHistóricoPedidos(ListaSimples<Pedido> históricoPedidos) {
-        this.históricoPedidos = históricoPedidos;
+        this.historicoPedidos = históricoPedidos;
     }
     public ListaDupla<Consulta> getRegistroMédico() {
-        return registroMédico;
+        return registroMedico;
     }
     public void setRegistroMédico(ListaDupla<Consulta> registroMédico) {
-        this.registroMédico = registroMédico;
+        this.registroMedico = registroMédico;
     }
     public ListaCircular<Evento> getEventosParticipados() {
         return eventosParticipados;
@@ -61,12 +61,12 @@ public class Cliente {
     }
     
     public void adicionarRegistro(Consulta novaConsulta){
-        registroMédico.adicionarInicio(novaConsulta);
+        registroMedico.adicionarInicio(novaConsulta);
     }
     public void adicionarEventoParticipado(Evento novoEvento){
         eventosParticipados.adicionarInicio(novoEvento);
     }
     public void adicionarPedidoFeito(Pedido novoPedido){
-        históricoPedidos.adicionarInicio(novoPedido);
+        historicoPedidos.adicionarInicio(novoPedido);
     }
 }
