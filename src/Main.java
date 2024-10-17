@@ -127,9 +127,6 @@ public class Main {
         scanner.close();
     }
 
-}
-        
-    }
 
     public Evento buscarEvento(Evento eventoAlvo){
         if(eventos.estaNaLista(eventoAlvo)){
@@ -248,11 +245,11 @@ public class Main {
         } else {
             atual.getValor().getEventosParticipados().adicionarInicio();
         }
+    }
         
         public void fecharConta(Mesa numeroMesa) {
         double totalApagar = numeroMesa.calcularTotal();
         numeroMesa.setDisponibilidade(true);
         System.out.println("O total a pagar será R$" + totalApagar);
-    }
     }
 }
