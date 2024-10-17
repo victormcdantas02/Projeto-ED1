@@ -111,5 +111,20 @@ public class Main {
             return atual.getValor();
         }
     }
-
+    public void adicionarRegistroEvento(Participante participanteNovo, Evento eventoParticipado){
+        eventoParticipado = buscarEvento(eventoParticipado);
+        eventoParticipado.registrarParticipante(participanteNovo);
+        NoCircular<Cliente> atual = registroClientes.getSentinela().getProx();
+        while(atual.getValor().getNome() != participanteNovo.getNome()){
+            if(atual == registroClientes.getSentinela()){
+                break;
+            }
+            atual = atual.getProx();
+        }
+        if(atual == Main.registroClientes.getSentinela()){
+            System.out.println("Cliente não encontrado");
+        } else {
+            atual.getValor().getEventosParticipados().adicionarInicio();
+        }
+    }
 }
