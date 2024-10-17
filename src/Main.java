@@ -1,12 +1,15 @@
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
+import java.util.Scanner;
 
 public class Main {
     public ListaSimples<Evento> eventos = new ListaSimples<>();
     public ListaCircular<Consulta> agendamentos = new ListaCircular<>();
     public static ListaCircular<Cliente> registroClientes = new ListaCircular<>();
     public static void main(String[] args) {
-        Main main = new Main();
+         Main main = new Main();
         Scanner scanner = new Scanner(System.in);
         int opcao;
 
@@ -123,6 +126,7 @@ public class Main {
 
         scanner.close();
     }
+
 }
         
     }
