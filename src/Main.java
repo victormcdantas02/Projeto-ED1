@@ -191,7 +191,7 @@ public class Main {
         if(atual == Main.registroClientes.getSentinela()){
             System.out.println("Cliente não encontrado");
         } else {
-            atual.getValor().getRegistroMédico().adicionarInicio(novaConsulta);
+            atual.getValor().getRegistroMedico().adicionarInicio(novaConsulta);
         }
     }
     public void atualizarConsulta(Paciente novoPaciente, Medico novoMedico, LocalDateTime novaDataHora, Consulta alvoAtualização){
