@@ -41,16 +41,16 @@ public class Cliente {
     public void setCpf(String cpf) {
         this.cpf = cpf;
     }
-    public ListaSimples<Pedido> getHistóricoPedidos() {
+    public ListaSimples<Pedido> getHistoricoPedidos() {
         return historicoPedidos;
     }
-    public void setHistoricoPedidos(ListaSimples<Pedido> históricoPedidos) {
+    public void setHistoricoPedidos(ListaSimples<Pedido> historicoPedidos) {
         this.historicoPedidos = históricoPedidos;
     }
     public ListaDupla<Consulta> getRegistroMedico() {
         return registroMedico;
     }
-    public void setRegistroMedico(ListaDupla<Consulta> registroMédico) {
+    public void setRegistroMedico(ListaDupla<Consulta> registroMedico) {
         this.registroMedico = registroMédico;
     }
     public ListaCircular<Evento> getEventosParticipados() {
