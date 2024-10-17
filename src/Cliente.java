@@ -44,13 +44,13 @@ public class Cliente {
     public ListaSimples<Pedido> getHistóricoPedidos() {
         return historicoPedidos;
     }
-    public void setHistóricoPedidos(ListaSimples<Pedido> históricoPedidos) {
+    public void setHistoricoPedidos(ListaSimples<Pedido> históricoPedidos) {
         this.historicoPedidos = históricoPedidos;
     }
-    public ListaDupla<Consulta> getRegistroMédico() {
+    public ListaDupla<Consulta> getRegistroMedico() {
         return registroMedico;
     }
-    public void setRegistroMédico(ListaDupla<Consulta> registroMédico) {
+    public void setRegistroMedico(ListaDupla<Consulta> registroMédico) {
         this.registroMedico = registroMédico;
     }
     public ListaCircular<Evento> getEventosParticipados() {
