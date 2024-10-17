@@ -230,6 +230,7 @@ public class Main {
             return atual.getValor();
         }
     }
+    
     public void adicionarRegistroEvento(Participante participanteNovo, Evento eventoParticipado){
         eventoParticipado = buscarEvento(eventoParticipado);
         eventoParticipado.registrarParticipante(participanteNovo);
@@ -243,9 +244,10 @@ public class Main {
         if(atual == Main.registroClientes.getSentinela()){
             System.out.println("Cliente não encontrado");
         } else {
-            atual.getValor().getEventosParticipados().adicionarInicio();
+            atual.getValor().getEventosParticipados().adicionarInicio(eventoParticipado);
         }
     }
+
         
         public void fecharConta(Mesa numeroMesa) {
         double totalApagar = numeroMesa.calcularTotal();
