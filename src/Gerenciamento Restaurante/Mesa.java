@@ -42,17 +42,17 @@ public class Mesa {
     public void adicionarPedidos(Pedido item){
         pedidosdaMesa.adicionarInicio(item);
         System.out.println("Pedido registrado.");
-        NoCircular<Cliente> atual = Main.registroClientes.getSentinela().getProx();
+        NoCircular<Pessoa> atual = Main.registroPessoas.getSentinela().getProx();
         while(atual.getValor().getNome() != cliente){
-            if(atual == Main.registroClientes.getSentinela()){
+            if(atual == Main.registroPessoas.getSentinela()){
                 break;
             }
             atual = atual.getProx();
         }
-        if(atual == Main.registroClientes.getSentinela()){
+        if(atual == Main.registroPessoas.getSentinela()){
             System.out.println("Cliente não encontrado");
         } else {
-            atual.getValor().getHistóricoPedidos().adicionarInicio(item);
+            atual.getValor().getHistoricoPedidos().adicionarInicio(item);
         }
     }
 
