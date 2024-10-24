@@ -1,4 +1,4 @@
-public class Cliente {
+public class Pessoa {
     private String nome;
     private int idade;
     private String email;
@@ -7,7 +7,7 @@ public class Cliente {
     private ListaDupla<Consulta> registroMedico;
     private ListaCircular<Evento> eventosParticipados;
 
-    public Cliente(String nome, int idade, String email, String cpf) {
+    public Pessoa(String nome, int idade, String email, String cpf) {
         this.nome = nome;
         this.idade = idade;
         this.email = email;
@@ -45,7 +45,7 @@ public class Cliente {
         return historicoPedidos;
     }
     public void setHistoricoPedidos(ListaSimples<Pedido> historicoPedidos) {
-        this.historicoPedidos = históricoPedidos;
+        this.historicoPedidos = historicoPedidos;
     }
     public ListaDupla<Consulta> getRegistroMedico() {
         return registroMedico;

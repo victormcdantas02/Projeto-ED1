@@ -7,7 +7,7 @@ import java.util.Scanner;
 public class Main {
     public ListaSimples<Evento> eventos = new ListaSimples<>();
     public ListaCircular<Consulta> agendamentos = new ListaCircular<>();
-    public static ListaCircular<Cliente> registroClientes = new ListaCircular<>();
+    public static ListaCircular<Pessoa> registroPessoas = new ListaCircular<>();
     public static void main(String[] args) {
          Main main = new Main();
         Scanner scanner = new Scanner(System.in);
@@ -15,7 +15,7 @@ public class Main {
 
         do {
             System.out.println("Escolha uma opção:");
-            System.out.println("1. Registrar Cliente");
+            System.out.println("1. Registrar Pessoa");
             System.out.println("2. Registrar Evento");
             System.out.println("3. Adicionar Participante a um Evento");
             System.out.println("4. Agendar Consulta");
@@ -27,17 +27,17 @@ public class Main {
 
             switch (opcao) {
                 case 1:
-                    System.out.println("Nome do Cliente:");
-                    String nomeCliente = scanner.nextLine();
-                    System.out.println("Idade do Cliente:");
+                    System.out.println("Nome:");
+                    String nomePessoa = scanner.nextLine();
+                    System.out.println("Idade:");
                     int idade = scanner.nextInt();
                     scanner.nextLine();
-                    System.out.println("Email do Cliente:");
+                    System.out.println("Email:");
                     String email = scanner.nextLine();
-                    System.out.println("CPF do Cliente:");
+                    System.out.println("CPF:");
                     String cpf = scanner.nextLine();
-                    Cliente novoCliente = new Cliente(nomeCliente, idade, email, cpf);
-                    main.registrarCliente(novoCliente);
+                    Pessoa novoPessoa = new Pessoa(nomePessoa, idade, email, cpf);
+                    main.registrarPessoa(novoPessoa);
                     break;
 
                 case 2:
@@ -94,15 +94,15 @@ public class Main {
                 case 5:
                     System.out.println("Número da Mesa:");
                     String numeroMesa = scanner.nextLine();
-                    System.out.println("Nome do Cliente:");
-                    String clienteMesa = scanner.nextLine();
+                    System.out.println("Nome do Pessoa:");
+                    String PessoaMesa = scanner.nextLine();
                     System.out.println("Descrição do Pedido:");
                     String descricaoPedido = scanner.nextLine();
                     System.out.println("Quantidade:");
                     int quantidadePedido = scanner.nextInt();
                     System.out.println("Preço:");
                     double precoPedido = scanner.nextDouble();
-                    Mesa mesa = new Mesa(numeroMesa, clienteMesa);
+                    Mesa mesa = new Mesa(numeroMesa, PessoaMesa);
                     Pedido pedido = new Pedido(descricaoPedido, quantidadePedido, precoPedido);
                     mesa.adicionarPedidos(pedido);
                     break;
@@ -181,23 +181,23 @@ public class Main {
         Consulta novaConsulta = new Consulta(nomePaciente, dataHoraConsulta, nomeMedico);
         agendamentos.adicionarInicio(novaConsulta);
         System.out.println("Consulta agendada para dia e hora " + dataHoraConsulta);
-        NoCircular<Cliente> atual = Main.registroClientes.getSentinela().getProx();
+        NoCircular<Pessoa> atual = Main.registroPessoas.getSentinela().getProx();
         while(atual.getValor().getNome() != nomePaciente.getNome()){
-            if(atual == Main.registroClientes.getSentinela()){
+            if(atual == Main.registroPessoas.getSentinela()){
                 break;
             }
             atual = atual.getProx();
         }
-        if(atual == Main.registroClientes.getSentinela()){
-            System.out.println("Cliente não encontrado");
+        if(atual == Main.registroPessoas.getSentinela()){
+            System.out.println("Pessoa não encontrado");
         } else {
             atual.getValor().getRegistroMedico().adicionarInicio(novaConsulta);
         }
     }
-    public void atualizarConsulta(Paciente novoPaciente, Medico novoMedico, LocalDateTime novaDataHora, Consulta alvoAtualização){
-        if(agendamentos.estaNaLista(alvoAtualização)){
+    public void atualizarConsulta(Paciente novoPaciente, Medico novoMedico, LocalDateTime novaDataHora, Consulta alvoAtualizacao){
+        if(agendamentos.estaNaLista(alvoAtualizacao)){
             NoCircular<Consulta> atual = agendamentos.getSentinela().getProx();
-            while(atual.getValor() != alvoAtualização){
+            while(atual.getValor() != alvoAtualizacao){
                 atual = atual.getProx();
             }
             atual.getValor().setNomePaciente(novoPaciente);
@@ -207,24 +207,24 @@ public class Main {
         }
         return;
     }
-    public void registrarCliente(Cliente novoCliente){
-        if(novoCliente == null){
-            System.out.println("Por favor, insira os dados do cliente corretamente.");
+    public void registrarPessoa(Pessoa novoPessoa){
+        if(novoPessoa == null){
+            System.out.println("Por favor, insira os dados do Pessoa corretamente.");
         } else {
-            registroClientes.adicionarInicio(novoCliente);
-            System.out.println("Novo cliente registrado.");
+            registroPessoas.adicionarInicio(novoPessoa);
+            System.out.println("Novo Pessoa registrado.");
         }
     }
-    public static Cliente buscarCliente(String nomeCliente){
-        NoCircular<Cliente> atual = registroClientes.getSentinela().getProx();
-        while(atual.getValor().getNome() != nomeCliente){
-            if(atual == registroClientes.getSentinela()){
+    public static Pessoa buscarPessoa(String nomePessoa){
+        NoCircular<Pessoa> atual = registroPessoas.getSentinela().getProx();
+        while(atual.getValor().getNome() != nomePessoa){
+            if(atual == registroPessoas.getSentinela()){
                 break;
             }
             atual = atual.getProx();
         }
-        if(atual == registroClientes.getSentinela()){
-            System.out.println("Cliente não encontrado");
+        if(atual == registroPessoas.getSentinela()){
+            System.out.println("Pessoa não encontrado");
             return null;
         } else {
             return atual.getValor();
@@ -234,15 +234,15 @@ public class Main {
     public void adicionarRegistroEvento(Participante participanteNovo, Evento eventoParticipado){
         eventoParticipado = buscarEvento(eventoParticipado);
         eventoParticipado.registrarParticipante(participanteNovo);
-        NoCircular<Cliente> atual = registroClientes.getSentinela().getProx();
+        NoCircular<Pessoa> atual = registroPessoas.getSentinela().getProx();
         while(atual.getValor().getNome() != participanteNovo.getNome()){
-            if(atual == registroClientes.getSentinela()){
+            if(atual == registroPessoas.getSentinela()){
                 break;
             }
             atual = atual.getProx();
         }
-        if(atual == Main.registroClientes.getSentinela()){
-            System.out.println("Cliente não encontrado");
+        if(atual == Main.registroPessoas.getSentinela()){
+            System.out.println("Pessoa não encontrado");
         } else {
             atual.getValor().getEventosParticipados().adicionarInicio(eventoParticipado);
         }
