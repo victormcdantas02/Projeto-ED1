@@ -1,12 +1,12 @@
 public class Pedido {
     String descricao;
     int quantidade;
-    double preço;
+    double preco;
     
-    public Pedido(String descricao, int quantidade, double preço) {
+    public Pedido(String descricao, int quantidade, double preco) {
         this.descricao = descricao;
         this.quantidade = quantidade;
-        this.preço = preço;
+        this.preco = preco;
     }
     
     public String getDescricao() {
@@ -17,12 +17,12 @@ public class Pedido {
         this.descricao = descricao;
     }
     
-    public double getPreço() {
-        return preço;
+    public double getPreco() {
+        return preco;
     }
     
-    public void setPreço(double preço) {
-        this.preço = preço;
+    public void setPreco(double preco) {
+        this.preco = preco;
     }
     
     public int getQuantidade() {
