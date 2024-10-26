@@ -21,6 +21,8 @@ public class Main {
             System.out.println("4. Agendar Consulta");
             System.out.println("5. Adicionar Pedido em uma Mesa");
             System.out.println("6. Fechar Conta de uma Mesa");
+            System.out.println("7. Consultar Pontos de Fidelidade");
+            System.out.println("8. Resgatar Pedido Grátis");
             System.out.println("0. Sair");
             opcao = scanner.nextInt();
             scanner.nextLine();
@@ -105,6 +107,9 @@ public class Main {
                     Mesa mesa = new Mesa(numeroMesa, PessoaMesa);
                     Pedido pedido = new Pedido(descricaoPedido, quantidadePedido, precoPedido);
                     mesa.adicionarPedidos(pedido);
+                    System.out.println("Usar pontos de fidelidade? (S/N):");
+                    String usarFidelidade = scanner.nextLine();
+                    mesa.adicionarPedidos(pedido, usarFidelidade.equalsIgnoreCase("S"));
                     break;
 
                 case 6:
@@ -112,6 +117,40 @@ public class Main {
                     String mesaNumero = scanner.nextLine();
                     Mesa mesaParaFechar = new Mesa(mesaNumero, "");
                     main.fecharConta(mesaParaFechar);
+                    break;
+
+                case 7:
+                    System.out.println("Nome do cliente:");
+                    String nomeClientePontos = scanner.nextLine();
+                    Pessoa clientePontos = buscarPessoa(nomeClientePontos);
+                    if (clientePontos != null) {
+                        int pontos = clientePontos.getFidelidade().getPontosAtuais();
+                        System.out.println("Pontos de fidelidade: " + pontos);
+                        if (pontos >= 10) {
+                            System.out.println("Cliente possui direito a um pedido grátis!");
+                        } else {
+                            System.out.println("Faltam " + (10 - pontos) + " pontos para um pedido grátis.");
+                        }
+                    }
+                    break;
+                    
+                case 8:
+                    System.out.println("Número da Mesa:");
+                    String numeroMesaFidelidade = scanner.nextLine();
+                    System.out.println("Nome do Cliente:");
+                    String nomeClienteFidelidade = scanner.nextLine();
+                    System.out.println("Descrição do Pedido:");
+                    String descricaoPedidoFidelidade = scanner.nextLine();
+                    System.out.println("Quantidade:");
+                    int quantidadePedidoFidelidade = scanner.nextInt();
+                    System.out.println("Preço Original:");
+                    double precoPedidoFidelidade = scanner.nextDouble();
+                    
+                    Mesa mesaFidelidade = new Mesa(numeroMesaFidelidade, nomeClienteFidelidade);
+                    Pedido pedidoFidelidade = new Pedido(descricaoPedidoFidelidade, 
+                                                        quantidadePedidoFidelidade, 
+                                                        precoPedidoFidelidade);
+                    mesaFidelidade.adicionarPedidos(pedidoFidelidade, true);
                     break;
 
                 case 0:
@@ -253,5 +292,25 @@ public class Main {
         double totalApagar = numeroMesa.calcularTotal();
         numeroMesa.setDisponibilidade(true);
         System.out.println("O total a pagar será R$" + totalApagar);
+    }
+
+
+    public void gerarRelatorioFidelidade(Pessoa cliente) {
+        System.out.println("\n=== Relatório de Fidelidade ===");
+        System.out.println("Cliente: " + cliente.getNome());
+        System.out.println("Pontos atuais: " + cliente.getFidelidade().getPontosAtuais());
+        System.out.println("Pedidos grátis resgatados: " + 
+                          cliente.getFidelidade().getPedidosResgatados().getTamanho());
+        
+        System.out.println("\nHistórico de Pedidos Grátis:");
+        NoSimples<Pedido> atual = cliente.getFidelidade().getPedidosResgatados().getPrimeiro();
+        while (atual != null) {
+            Pedido pedido = atual.getValor();
+            System.out.printf("- %s (Qtd: %d) - Valor original: R$ %.2f%n",
+                pedido.getDescricao(),
+                pedido.getQuantidade(),
+                pedido.getPreco());
+            atual = atual.getProx();
+        }
     }
 }

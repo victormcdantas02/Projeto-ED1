@@ -72,7 +72,7 @@ public class Restaurante {
     public void atualizarPedidoMesa(Mesa numeroMesa, Pedido pratoPedido, String novaDescricao, double novoValor) {
         Pedido atualização = buscarPedidoMesa(numeroMesa, pratoPedido);
         atualização.setDescricao(novaDescricao);
-        atualização.setPreço(novoValor);
+        atualização.setPreco(novoValor);
         NoDuplo<Mesa> atual = mesas.getPrimeiro();
         while(atual.getValor() != numeroMesa){
             atual = atual.getProx();

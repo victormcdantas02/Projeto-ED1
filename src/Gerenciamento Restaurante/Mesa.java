@@ -64,7 +64,7 @@ public class Mesa {
         NoSimples<Pedido> atual = pedidosdaMesa.getPrimeiro();
         double total = 0;
         while (atual != null){
-            total = total + atual.getValor().getPreço();
+            total = total + atual.getValor().getPreco();
             atual = atual.getProx();
         }
         ListaSimples<Pedido> novoRegistro = new ListaSimples<>();
