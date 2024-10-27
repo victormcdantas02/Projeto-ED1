@@ -93,7 +93,7 @@ public class Main {
                     main.agendarConsulta(medico, novoPaciente, dataConsulta);
                     break;
 
-                    case 5:
+                case 5:
                     System.out.println("Número da Mesa:");
                     String numeroMesa = scanner.nextLine();
                     System.out.println("Nome do Cliente:");
@@ -114,6 +114,37 @@ public class Main {
                     String mesaNumero = scanner.nextLine();
                     Mesa mesaParaFechar = new Mesa(mesaNumero, "");
                     main.fecharConta(mesaParaFechar);
+                    break;
+
+                case 7:
+                    System.out.println("Digite o nome do cliente para consultar os pontos:");
+                    String nomeClientePontos = scanner.nextLine();
+                    Pessoa clientePontos = buscarPessoa(nomeClientePontos);
+                    if (clientePontos != null) {
+                        main.gerarRelatorioFidelidade(clientePontos);
+                    }
+                    break;
+
+                case 8:
+                    System.out.println("Digite o nome do cliente:");
+                    String nomeClienteResgate = scanner.nextLine();
+                    System.out.println("Descrição do Pedido a ser resgatado:");
+                    String descricaoResgate = scanner.nextLine();
+                    System.out.println("Quantidade:");
+                    int quantidadeResgate = scanner.nextInt();
+                    System.out.println("Preço original (para registro):");
+                    double precoResgate = scanner.nextDouble();
+                    Pessoa clienteResgate = buscarPessoa(nomeClienteResgate);
+                    if (clienteResgate != null) {
+                        if (clienteResgate.getFidelidade().podeResgatarGratis()) {
+                            Pedido pedidoResgate = new Pedido(descricaoResgate, quantidadeResgate, precoResgate);
+                            clienteResgate.getFidelidade().resgatarPedidoGratis(pedidoResgate);
+                        } else {
+                            System.out.println("Cliente não possui pontos suficientes para resgate.");
+                            System.out.println("Pontos atuais: " + clienteResgate.getFidelidade().getPontosAtuais());
+                            System.out.println("Pontos necessários: 10");
+                        }
+                    }
                     break;
 
                 case 0:
