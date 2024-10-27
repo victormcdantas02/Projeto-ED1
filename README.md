@@ -18,4 +18,14 @@ Gustavo Luiz
 
 Victor Dantas
 
+Perguntas de tomada de decisão:
 
+1 -
+
+2 -
+
+3 -
+
+4 -
+
+5 -

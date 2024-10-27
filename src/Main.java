@@ -93,23 +93,20 @@ public class Main {
                     main.agendarConsulta(medico, novoPaciente, dataConsulta);
                     break;
 
-                case 5:
+                    case 5:
                     System.out.println("Número da Mesa:");
                     String numeroMesa = scanner.nextLine();
-                    System.out.println("Nome do Pessoa:");
-                    String PessoaMesa = scanner.nextLine();
+                    System.out.println("Nome do Cliente:");
+                    String clienteMesa = scanner.nextLine();
                     System.out.println("Descrição do Pedido:");
                     String descricaoPedido = scanner.nextLine();
                     System.out.println("Quantidade:");
                     int quantidadePedido = scanner.nextInt();
                     System.out.println("Preço:");
                     double precoPedido = scanner.nextDouble();
-                    Mesa mesa = new Mesa(numeroMesa, PessoaMesa);
+                    Mesa mesa = new Mesa(numeroMesa, clienteMesa);
                     Pedido pedido = new Pedido(descricaoPedido, quantidadePedido, precoPedido);
                     mesa.adicionarPedidos(pedido);
-                    System.out.println("Usar pontos de fidelidade? (S/N):");
-                    String usarFidelidade = scanner.nextLine();
-                    mesa.adicionarPedidos(pedido, usarFidelidade.equalsIgnoreCase("S"));
                     break;
 
                 case 6:
@@ -117,40 +114,6 @@ public class Main {
                     String mesaNumero = scanner.nextLine();
                     Mesa mesaParaFechar = new Mesa(mesaNumero, "");
                     main.fecharConta(mesaParaFechar);
-                    break;
-
-                case 7:
-                    System.out.println("Nome do cliente:");
-                    String nomeClientePontos = scanner.nextLine();
-                    Pessoa clientePontos = buscarPessoa(nomeClientePontos);
-                    if (clientePontos != null) {
-                        int pontos = clientePontos.getFidelidade().getPontosAtuais();
-                        System.out.println("Pontos de fidelidade: " + pontos);
-                        if (pontos >= 10) {
-                            System.out.println("Cliente possui direito a um pedido grátis!");
-                        } else {
-                            System.out.println("Faltam " + (10 - pontos) + " pontos para um pedido grátis.");
-                        }
-                    }
-                    break;
-                    
-                case 8:
-                    System.out.println("Número da Mesa:");
-                    String numeroMesaFidelidade = scanner.nextLine();
-                    System.out.println("Nome do Cliente:");
-                    String nomeClienteFidelidade = scanner.nextLine();
-                    System.out.println("Descrição do Pedido:");
-                    String descricaoPedidoFidelidade = scanner.nextLine();
-                    System.out.println("Quantidade:");
-                    int quantidadePedidoFidelidade = scanner.nextInt();
-                    System.out.println("Preço Original:");
-                    double precoPedidoFidelidade = scanner.nextDouble();
-                    
-                    Mesa mesaFidelidade = new Mesa(numeroMesaFidelidade, nomeClienteFidelidade);
-                    Pedido pedidoFidelidade = new Pedido(descricaoPedidoFidelidade, 
-                                                        quantidadePedidoFidelidade, 
-                                                        precoPedidoFidelidade);
-                    mesaFidelidade.adicionarPedidos(pedidoFidelidade, true);
                     break;
 
                 case 0:
