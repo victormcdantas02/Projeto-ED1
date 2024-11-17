@@ -29,3 +29,13 @@ Perguntas de tomada de decisão:
 4-Como que um programa de fidelidade pode fazer com que os clientes tenham maior frequência no Restaurante? 
 
 5-Quais eventos tivearam maior satisfação dos participantes com base no feedback positivo?
+
+Contribuições de cade integrante:
+
+Breno:
+
+Gustavo:
+
+Ivo:
+
+Victor:
