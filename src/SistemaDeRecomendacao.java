@@ -2,7 +2,7 @@ import java.util.LinkedList;
 import java.util.Stack;
 
 public class SistemaDeRecomendacao {
-    private BTnode<String> preferencesTree; // Árvore de preferências
+    private Arvore<String> preferencesTree; // Árvore de preferências
     private LinkedList<String> recommendationQueue; // Fila de recomendações
     private Stack<String> historyStack; // Pilha de histórico
 
@@ -15,7 +15,7 @@ public class SistemaDeRecomendacao {
     // Adiciona preferências na árvore
     public void addPreference(String preference) {
         if (preferencesTree == null) {
-            preferencesTree = new BTnode<>(preference, null, null);
+            preferencesTree = new Arvore<>(preference, null, null);
         } else {
             preferencesTree.insert(preference);
         }
@@ -29,7 +29,7 @@ public class SistemaDeRecomendacao {
     }
 
     // Navega pela árvore para preencher a fila de recomendações
-    private void traverseTree(BTnode<String> node) {
+    private void traverseTree(Arvore<String> node) {
         if (node == null) return;
 
         traverseTree(node.getLeft());
