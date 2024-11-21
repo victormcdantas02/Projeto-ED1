@@ -18,6 +18,8 @@ Gustavo Luiz
 
 Victor Dantas
 
+Pedro Akio
+
 Perguntas de tomada de decisão:
 
 1-Qual o perfil de paciente que mais usam os serviços da clínica?

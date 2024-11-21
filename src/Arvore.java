@@ -3,6 +3,7 @@ public class Arvore<T extends Comparable<T>> {
     private Arvore<T> left; 
     private Arvore<T> right; 
 
+    
     public Arvore(T v, Arvore<T> l, Arvore<T> r) {
         value = v;
         left = l;

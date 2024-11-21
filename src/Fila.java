@@ -1,16 +1,16 @@
 public class Fila<T> {
-    private NoFila<T> começo;
+    private NoFila<T> comeco;
     private NoFila<T> fim;
     private int tamanho;
 
     public Fila(){
-        this.começo = null;
+        this.comeco = null;
         this.fim = null;
         this.tamanho = 0;
     }
 
     public boolean isVazia(){
-        return começo == null;
+        return comeco == null;
     }
 
     public int tamanho(){
@@ -20,7 +20,7 @@ public class Fila<T> {
     public void adicionarFila(T valor){
         NoFila<T> novoNo = new NoFila<>(valor);
         if(isVazia()){
-            começo = novoNo;
+            comeco = novoNo;
             fim = novoNo;
         } else {
             fim.setProx(novoNo);
@@ -33,19 +33,19 @@ public class Fila<T> {
         if(isVazia()){
             System.out.println("A pilha está vazia.");
         }
-        T valor = começo.getValor();
-        começo = começo.getProx();
-        if(começo == null){
+        T valor = comeco.getValor();
+        comeco = comeco.getProx();
+        if(comeco == null){
             fim = null;
         }
         tamanho-=1;
         return valor;
     }
     
-    public T olharComeço(){
+    public T olharComeco(){
         if(isVazia()){
             System.out.println("A pilha está vazia.");
         }
-        return começo.getValor();
+        return comeco.getValor();
     }
 }
