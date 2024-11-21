@@ -20,16 +20,15 @@ Victor Dantas
 
 Perguntas de tomada de decisão:
 
-1-Qual a especialidade médica de maior demanda na clínica?
+1-Qual o perfil de paciente que mais usam os serviços da clínica?
 
-2-Quais tipos de eventos tiveram maior número de pedidos no restaurante?
+2-Quantos pedidos foram feitos no restaurante? 
 
-3- Quais combinações de pratos e bebidas são mais solicitados pelos clientes? 
+3- Qual é a especialidade médica que tem mais pacientes na fila de espera?
 
-4-Como que um programa de fidelidade pode fazer com que os clientes tenham maior frequência no Restaurante? 
+4- Quantos eventos foram registrados no último mês?
 
-5-Quais eventos tivearam maior satisfação dos participantes com base no feedback positivo?
-
+5- Qual a capacidade máxima de clientes que o restaurante pode atender simultaneamente?
 Contribuições de cade integrante:
 
 Breno:
