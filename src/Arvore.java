@@ -1,10 +1,10 @@
-public class BTnode<T extends Comparable<T>> {
+public class Arvore<T extends Comparable<T>> {
     private T value;         // Valor guardado no nó
-    private BTnode<T> left;  // Filho esquerdo
-    private BTnode<T> right; // Filho direito
+    private Arvore<T> left;  // Filho esquerdo
+    private Arvore<T> right; // Filho direito
 
     // Construtor
-    public BTnode(T v, BTnode<T> l, BTnode<T> r) {
+    public Arvore(T v, Arvore<T> l, Arvore<T> r) {
         value = v;
         left = l;
         right = r;
@@ -12,23 +12,23 @@ public class BTnode<T extends Comparable<T>> {
 
     // Getters e Setters
     public T getValue() { return value; }
-    public BTnode<T> getLeft() { return left; }
-    public BTnode<T> getRight() { return right; }
+    public Arvore<T> getLeft() { return left; }
+    public Arvore<T> getRight() { return right; }
     public void setValue(T v) { value = v; }
-    public void setLeft(BTnode<T> l) { left = l; }
-    public void setRight(BTnode<T> r) { right = r; }
+    public void setLeft(Arvore<T> l) { left = l; }
+    public void setRight(Arvore<T> r) { right = r; }
 
     // Função para inserir um novo valor na árvore
     public void insert(T newValue) {
         if (newValue.compareTo(value) < 0) {
             if (left == null) {
-                left = new BTnode<>(newValue, null, null);
+                left = new Arvore<>(newValue, null, null);
             } else {
                 left.insert(newValue);
             }
         } else if (newValue.compareTo(value) > 0) {
             if (right == null) {
-                right = new BTnode<>(newValue, null, null);
+                right = new Arvore<>(newValue, null, null);
             } else {
                 right.insert(newValue);
             }
@@ -36,7 +36,7 @@ public class BTnode<T extends Comparable<T>> {
     }
 
     // Função para buscar um valor na árvore
-    public BTnode<T> search(T targetValue) {
+    public Arvore<T> search(T targetValue) {
         if (targetValue.equals(value)) {
             return this;
         } else if (targetValue.compareTo(value) < 0) {
@@ -47,7 +47,7 @@ public class BTnode<T extends Comparable<T>> {
     }
 
     // Função para remover um valor da árvore
-    public BTnode<T> remove(T targetValue) {
+    public Arvore<T> remove(T targetValue) {
         if (targetValue.compareTo(value) < 0) {
             if (left != null) {
                 left = left.remove(targetValue);
@@ -68,7 +68,7 @@ public class BTnode<T extends Comparable<T>> {
                 return left;
             }
             // Caso 3: Nó com dois filhos
-            BTnode<T> minValueNode = right.findMin();
+            Arvore<T> minValueNode = right.findMin();
             value = minValueNode.getValue();
             right = right.remove(minValueNode.getValue());
         }
@@ -76,7 +76,7 @@ public class BTnode<T extends Comparable<T>> {
     }
 
     // Função auxiliar para encontrar o menor valor em uma subárvore
-    private BTnode<T> findMin() {
+    private Arvore<T> findMin() {
         return (left == null) ? this : left.findMin();
     }
 }
