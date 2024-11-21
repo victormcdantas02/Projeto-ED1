@@ -43,3 +43,6 @@ Criação de métodos e atributos dos caso de Evento, Restaurante e Hospital
 Victor:
 Correções nos códigos 
 
+Pedro Akio:
+
+
