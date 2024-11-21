@@ -33,9 +33,11 @@ Perguntas de tomada de decisão:
 Contribuições de cade integrante:
 
 Breno:
-
+Melhorias e adições nas classes dos casos solicitados
 Gustavo:
-
+Criação de bases para Listas, Pilha e Fila
 Ivo:
-
+Criação de métodos e atributos dos caso de Evento, Restaurante e Hospital
 Victor:
+Correções nos códigos 
+
