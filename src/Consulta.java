@@ -6,11 +6,13 @@ public class Consulta {
     private Medico nomeMedico;
     private ListaCircular<Paciente> registroPacientes = new ListaCircular<>();
     private ListaDupla<Medico> registroMedicos = new ListaDupla<>();
+    private Pilha<String> historicoAcoes;
     
     public Consulta(Paciente nomePaciente, LocalDateTime diaConsulta, Medico nomeMedico) {
         this.nomePaciente = nomePaciente;
         this.diaConsulta = diaConsulta;
         this.nomeMedico = nomeMedico;
+        this.historicoAcoes = new Pilha<>();
     }
     public Paciente getNomePaciente() {
         return nomePaciente;
@@ -77,5 +79,14 @@ public class Consulta {
             return null;
         }
     }
-
+    public void registrarAcao(String acao) {
+        historicoAcoes.adicionar(acao);
+    }
+    
+    public String desfazerUltimaAcao() {
+        if(historicoAcoes.isVazia()) {
+            return "Sem ações para desfazer";
+        }
+        return historicoAcoes.remover();
+    }
 }
