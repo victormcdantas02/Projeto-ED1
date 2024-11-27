@@ -7,13 +7,16 @@ public class Consulta {
     private ListaCircular<Paciente> registroPacientes = new ListaCircular<>();
     private ListaDupla<Medico> registroMedicos = new ListaDupla<>();
     private Pilha<String> historicoAcoes;
+    private Fila<Paciente> filaEmergencial;
     
     public Consulta(Paciente nomePaciente, LocalDateTime diaConsulta, Medico nomeMedico) {
         this.nomePaciente = nomePaciente;
         this.diaConsulta = diaConsulta;
         this.nomeMedico = nomeMedico;
-        this.historicoAcoes = new Pilha<>();
+        this.filaEmergencial = new Fila<>();
+        this.historicoAcoes = new Pilha<>(); 
     }
+    
     public Paciente getNomePaciente() {
         return nomePaciente;
     }
@@ -88,5 +91,34 @@ public class Consulta {
             return "Sem ações para desfazer";
         }
         return historicoAcoes.remover();
+    }
+
+    public void adicionarPacienteEmergencial(Paciente paciente) {
+        filaEmergencial.adicionarFila(paciente);
+        historicoAcoes.adicionar("Paciente " + paciente.getNome() + " adicionado à fila emergencial");
+        System.out.println("Paciente " + paciente.getNome() + " adicionado à fila de emergência");
+    }
+
+    public Paciente atenderProximoEmergencial() {
+        if (filaEmergencial.isVazia()) {
+            System.out.println("Não há pacientes na fila de emergência");
+            return null;
+        }
+        Paciente paciente = filaEmergencial.removerFila();
+        historicoAcoes.adicionar("Paciente " + paciente.getNome() + " atendido da fila emergencial");
+        System.out.println("Atendendo paciente emergencial: " + paciente.getNome());
+        return paciente;
+    }
+
+    public Paciente consultarProximoEmergencial() {
+        if (filaEmergencial.isVazia()) {
+            System.out.println("Não há pacientes na fila de emergência");
+            return null;
+        }
+        return filaEmergencial.olharComeco();
+    }
+
+    public int numeroEmergencias() {
+        return filaEmergencial.tamanho();
     }
 }
