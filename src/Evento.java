@@ -74,5 +74,14 @@ public class Evento {
         }
 
     }
-    
+    public void decrementarCapacidade() {
+        if (this.capacidade > 0) {
+            this.capacidade--;
+        }
+    }
+
+    public void incrementarCapacidade() {
+        this.capacidade++;
+    }
+
 }

@@ -8,6 +8,9 @@ public class Main {
     public ListaSimples<Evento> eventos = new ListaSimples<>();
     public ListaCircular<Consulta> agendamentos = new ListaCircular<>();
     public static ListaCircular<Pessoa> registroPessoas = new ListaCircular<>();
+    public Pilha<Evento> historicoEventos = new Pilha<>();
+    public Fila<Participante> filaInscricaoPrioritaria = new Fila<>();
+    public Arvore<Participante> arvoreParticipantes = new Arvore<>(null, null, null);
     public static void main(String[] args) {
          Main main = new Main();
         Scanner scanner = new Scanner(System.in);
@@ -42,21 +45,32 @@ public class Main {
                     main.registrarPessoa(novoPessoa);
                     break;
 
-                case 2:
+                    case 2:
                     System.out.println("Nome do Evento:");
                     String nomeEvento = scanner.nextLine();
                     System.out.println("Local do Evento:");
                     String local = scanner.nextLine();
                     System.out.println("Capacidade do Evento:");
                     int capacidade = scanner.nextInt();
-                    scanner.nextLine();
+                    scanner.nextLine();  // Limpar o buffer após ler o inteiro
+                
                     System.out.println("Data do Evento (dd/MM/yyyy):");
                     String dataEvento = scanner.nextLine();
+                
+                    // Tentar parsear a data e validar se o formato está correto
                     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-                    LocalDate diaEvento = LocalDate.parse(dataEvento, formatter);
+                    LocalDate diaEvento = null;
+                    try {
+                        diaEvento = LocalDate.parse(dataEvento, formatter);
+                    } catch (Exception e) {
+                        System.out.println("Formato de data inválido. Por favor, insira a data no formato dd/MM/yyyy.");
+                        break;  // Interromper o processo caso o formato da data seja inválido
+                    }
+                
                     Evento novoEvento = new Evento(nomeEvento, local, capacidade, java.sql.Date.valueOf(diaEvento));
+                
                     main.registrarEvento(novoEvento);
-                    break;
+                    break;                
 
                 case 3:
                     System.out.println("Nome do Participante:");
@@ -160,6 +174,11 @@ public class Main {
         scanner.close();
     }
 
+    public void visualizarEvento(Evento evento) {
+        historicoEventos.adicionar(evento); // Adiciona o evento na pilha
+        // Exibe informações do evento
+        System.out.println("Visualizando evento: " + evento.getNome());
+    }
 
     public Evento buscarEvento(Evento eventoAlvo){
         if(eventos.estaNaLista(eventoAlvo)){
@@ -173,6 +192,44 @@ public class Main {
             return null;
         }
     }
+
+    public void mostrarHistoricoEventos() {
+        System.out.println("Histórico de Eventos:");
+        Pilha<Evento> tempPilha = new Pilha<>();
+        while (!historicoEventos.isVazia()) {
+            Evento evento = historicoEventos.remover();
+            System.out.println(evento.getNome());
+            tempPilha.adicionar(evento);  // Coloca na pilha temporária para restaurar o histórico
+        }
+        // Restaura o histórico para a pilha original
+        while (!tempPilha.isVazia()) {
+            historicoEventos.adicionar(tempPilha.remover());
+        }
+    }
+
+    public void registrarParticipanteArvore(Participante participante) {
+        arvoreParticipantes.insert(participante);  // Inserir participante na árvore
+        System.out.println("Participante " + participante.getNome() + " registrado.");
+    }
+
+    public Participante buscarParticipantePorNome(String nome) {
+        Arvore<Participante> resultado = arvoreParticipantes.search(new Participante(nome, 0, null));
+        if (resultado != null) {
+            return resultado.getValue();  // Retorna o participante encontrado
+        }
+        System.out.println("Participante não encontrado.");
+        return null;
+    }
+
+    public Participante buscarParticipantePorInscricao(int numeroInscricao) {
+        Arvore<Participante> resultado = arvoreParticipantes.search(new Participante("", numeroInscricao, null));
+        if (resultado != null) {
+            return resultado.getValue();  // Retorna o participante encontrado
+        }
+        System.out.println("Participante não encontrado.");
+        return null;
+    }
+
     public Participante buscarParticipante(Participante participante){
         Evento eventoInscrito = participante.getEvento();
         if(eventos.estaNaLista(eventoInscrito)){
@@ -288,6 +345,31 @@ public class Main {
         System.out.println("O total a pagar será R$" + totalApagar);
     }
 
+    public void inscreverParticipante(Participante participante) {
+        Evento evento = participante.getEvento();
+        if (evento.getCapacidade() > 0) {
+            filaInscricaoPrioritaria.adicionarFila(participante);  // Adiciona participante à fila
+            evento.decrementarCapacidade();  // Decremente a capacidade do evento
+            System.out.println("Participante " + participante.getNome() + " inscrito com sucesso.");
+        } else {
+            System.out.println("Evento cheio. Colocando na fila de espera.");
+        }
+    }
+
+    // Processando inscrições prioritárias:
+    public void processarInscricoes() {
+        while (!filaInscricaoPrioritaria.isVazia()) {
+            Participante participante = filaInscricaoPrioritaria.removerFila();
+            Evento evento = participante.getEvento();
+            if (evento.getCapacidade() > 0) {
+                evento.registrarParticipante(participante);  // Registra o participante no evento
+                evento.decrementarCapacidade();  // Decremente a capacidade do evento
+                System.out.println("Inscrição de " + participante.getNome() + " processada com sucesso.");
+            } else {
+                System.out.println("Evento cheio, participante " + participante.getNome() + " ainda na fila.");
+            }
+        }
+    }
 
     public void gerarRelatorioFidelidade(Pessoa cliente) {
         System.out.println("\n=== Relatório de Fidelidade ===");

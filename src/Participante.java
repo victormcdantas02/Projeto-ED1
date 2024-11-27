@@ -1,4 +1,4 @@
-public class Participante {
+public class Participante implements Comparable<Participante> {
     private String nome;
     private int numeroInscricao;
     private Evento evento;
@@ -31,5 +31,12 @@ public class Participante {
 
     public void setEvento(Evento evento) {
         this.evento = evento;
+    }
+
+    // Implementação do método compareTo
+    @Override
+    public int compareTo(Participante outroParticipante) {
+        // Comparar com base no número de inscrição
+        return Integer.compare(this.numeroInscricao, outroParticipante.numeroInscricao);
     }
 }
