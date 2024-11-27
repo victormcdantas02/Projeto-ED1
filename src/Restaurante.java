@@ -1,84 +1,51 @@
 public class Restaurante {
-    private ListaDupla<Mesa> mesas;
+    private Arvore<ItemMenu> arvoreMenu; // Árvore binária para os itens do menu
 
+    // Construtor
     public Restaurante() {
-        mesas = new ListaDupla<>();
+        this.arvoreMenu = null; // Inicializa a árvore como null
     }
 
-    public ListaDupla<Mesa> getMesas(){
-        return mesas;
-    }
-    public void setMesas(ListaDupla<Mesa> mesas) {
-        this.mesas = mesas;
-    }
-
-    public void registrarMesa(Mesa mesa) {
-        if (mesa == null){
-            System.out.println("Favor inserir os dados da mesa corretamente");
-            return;
-        }
-        mesas.adicionarInicio(mesa);
-        System.out.println("Mesa registrada com sucesso.");
-    }
-
-    public void fecharConta(Mesa numeroMesa) {
-        if(mesas.estaNaLista(numeroMesa)){
-            NoDuplo<Mesa> atual = mesas.getPrimeiro();
-            while(atual.getValor() != numeroMesa){
-                atual = atual.getProx();
-            }
-            double totalApagar = atual.getValor().calcularTotal();
-            atual.getValor().setDisponibilidade(true);
-            System.out.println("O total a pagar será R$" + totalApagar);
-        }
-    }
-
-    public Mesa buscarMesa(Mesa numeroMesa){
-        if(mesas.estaNaLista(numeroMesa)){
-            NoDuplo<Mesa> atual = mesas.getPrimeiro();
-            while(atual.getValor() != numeroMesa){
-                atual = atual.getProx();
-            }
-            return atual.getValor();
+    // Método para registrar um pedido (ou adicionar um item ao menu)
+    public void registrarPedido(String nomeItem) {
+        // Verifica se o item já existe no menu
+        if (arvoreMenu == null) {
+            // Se a árvore estiver vazia, cria a árvore com o primeiro item
+            arvoreMenu = new Arvore<>(new ItemMenu(nomeItem), null, null);
         } else {
-            System.out.println("Mesa não localizada.");
-            return null;
+            // Se a árvore não estiver vazia, insere o item
+            arvoreMenu.insert(new ItemMenu(nomeItem));
         }
     }
 
-    public Pedido buscarPedidoMesa(Mesa numeroMesa, Pedido pratoPedido) {
-        if(mesas.estaNaLista(numeroMesa)){
-            NoDuplo<Mesa> atual = mesas.getPrimeiro();
-            while(atual.getValor() != numeroMesa){
-                atual = atual.getProx();
-            }
-            ListaSimples<Pedido> pedidosdaMesa = atual.getValor().getPedidosdaMesa();
-            if(pedidosdaMesa.estaNaLista(pratoPedido)){
-                NoSimples<Pedido> atualPedido = pedidosdaMesa.getPrimeiro();
-                while (atualPedido.getValor() != pratoPedido){
-                    atualPedido = atualPedido.getProx();
-                }
-                return atualPedido.getValor();
-            } else {
-                System.out.println("Pedido não localizado.");
-                return null;
-            }
+    // Método para consultar produtos populares
+    public void consultarProdutosPopulares() {
+        if (arvoreMenu == null) {
+            System.out.println("Nenhum item no menu.");
         } else {
-            System.out.println("Mesa não localizada");
-            return null;
+            // Aqui, pode-se adicionar a lógica para mostrar os itens populares
+            // Exemplo: Percorrer a árvore e mostrar itens
+            mostrarProdutosPopulares(arvoreMenu);
         }
     }
 
-    public void atualizarPedidoMesa(Mesa numeroMesa, Pedido pratoPedido, String novaDescricao, double novoValor) {
-        Pedido atualização = buscarPedidoMesa(numeroMesa, pratoPedido);
-        atualização.setDescricao(novaDescricao);
-        atualização.setPreco(novoValor);
-        NoDuplo<Mesa> atual = mesas.getPrimeiro();
-        while(atual.getValor() != numeroMesa){
-            atual = atual.getProx();
+    // Método recursivo para percorrer a árvore e mostrar produtos populares
+    private void mostrarProdutosPopulares(Arvore<ItemMenu> arvore) {
+        if (arvore != null) {
+            // Primeiro percorre a esquerda
+            mostrarProdutosPopulares(arvore.getLeft());
+            // Exibe o item e sua popularidade
+            ItemMenu item = arvore.getValue();
+            System.out.println(item.getNome() + " - Popularidade: " + item.getPopularidade());
+            // Depois percorre a direita
+            mostrarProdutosPopulares(arvore.getRight());
         }
-        atual.getValor().getPedidosdaMesa().removerMeio(pratoPedido);
-        atual.getValor().getPedidosdaMesa().adicionarInicio(atualização);
+    }
+
+    // Método para atualizar a popularidade de um item
+    public void aumentarPopularidade(String nomeItem) {
+        if (arvoreMenu != null) {
+            arvoreMenu.atualizarPopularidade(new ItemMenu(nomeItem));
+        }
     }
 }
-
