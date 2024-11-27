@@ -87,25 +87,35 @@ public class Main {
                     }
                     break;
 
+                // Parte do case 4 - Agendar Consulta
                 case 4:
                     System.out.println("Nome do Paciente:");
                     String nomePaciente = scanner.nextLine();
                     System.out.println("Idade do Paciente:");
                     int idadePaciente = scanner.nextInt();
-                    scanner.nextLine();
+                    scanner.nextLine(); // Limpar o buffer após o próximo inteiro
                     System.out.println("Histórico Médico do Paciente:");
                     String historico = scanner.nextLine();
                     System.out.println("Nome do Médico:");
                     String nomeMedico = scanner.nextLine();
                     System.out.println("Especialidade do Médico:");
                     String especialidade = scanner.nextLine();
+
+                    // Leitura da data e hora da consulta no formato 'dd/MM/yyyy HH:mm'
                     System.out.println("Data e Hora da Consulta (dd/MM/yyyy HH:mm):");
                     String dataHoraConsulta = scanner.nextLine();
-                    LocalDateTime dataConsulta = LocalDateTime.parse(dataHoraConsulta, DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"));
-                    Paciente novoPaciente = new Paciente(nomePaciente, idadePaciente, historico, new java.util.Date());
-                    Medico medico = new Medico(nomeMedico, especialidade, true);
-                    main.agendarConsulta(medico, novoPaciente, dataConsulta);
-                    break;
+
+                    // Tenta parsear a data e hora
+                    try {
+                        LocalDateTime dataConsulta = LocalDateTime.parse(dataHoraConsulta, DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"));
+                        Paciente novoPaciente = new Paciente(nomePaciente, idadePaciente, historico, new java.util.Date());
+                        Medico medico = new Medico(nomeMedico, especialidade, true);
+                        main.agendarConsulta(medico, novoPaciente, dataConsulta);
+                    } catch (Exception e) {
+                        System.out.println("Formato de data e hora inválido. Tente novamente no formato dd/MM/yyyy HH:mm.");
+                    }
+                break;
+
 
                 case 5:
                     System.out.println("Número da Mesa:");

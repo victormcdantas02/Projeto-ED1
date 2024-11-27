@@ -1,36 +1,29 @@
-public class Medico {
+public class Medico implements Comparable<Medico> {
     private String nome;
     private String especialidade;
-    private boolean disponibilidade;
-    
-    public Medico(String nome, String especialidade, boolean disponibilidade) {
+    private boolean disponivel;
+
+    public Medico(String nome, String especialidade, boolean disponivel) {
         this.nome = nome;
         this.especialidade = especialidade;
-        this.disponibilidade = disponibilidade;
-    }
-
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
+        this.disponivel = disponivel;
     }
 
     public String getEspecialidade() {
         return especialidade;
     }
 
-    public void setEspecialidade(String especialidade) {
-        this.especialidade = especialidade;
-    }
-    
-    public boolean isDisponibilidade() {
-        return disponibilidade;
+    public boolean isDisponivel() {
+        return disponivel;
     }
 
-    public void setDisponibilidade(boolean disponibilidade) {
-        this.disponibilidade = disponibilidade;
+    public String getNome() {
+        return nome;
     }
 
+    @Override
+    public int compareTo(Medico outroMedico) {
+        // Comparar pelo nome do médico, que será o critério de comparação default
+        return this.nome.compareTo(outroMedico.getNome());
+    }
 }
